@@ -25,7 +25,7 @@ class UserManager extends Map {
 					{ userId: this.userId, ...values }
 			  )
 			: await this.model.create({ userId: this.userId, ...values });
-
+		this.clear();
 		return { userId: this.userId, ...values };
 	}
 }
