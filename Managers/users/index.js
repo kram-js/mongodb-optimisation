@@ -16,6 +16,13 @@ class UserManager extends Map {
 		this.userId = userId;
 		this.model = require("./model");
 	}
+	async sync() {
+		const values = await this.model.findOne({ userId: this.userId });
+		for (const key in values?.toObject()) {
+			if (!key.includes("_")) this.set(key, values[key]);
+		}
+		return this;
+	}
 	async save() {
 		const values = {};
 		this.forEach((v, k) => (values[k] = v));
@@ -25,7 +32,7 @@ class UserManager extends Map {
 					{ userId: this.userId, ...values }
 			  )
 			: await this.model.create({ userId: this.userId, ...values });
-		this.clear();
+
 		return { userId: this.userId, ...values };
 	}
 }
