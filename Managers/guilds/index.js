@@ -26,7 +26,8 @@ class GuildManager extends Map {
 					{ guildId: this.guildId },
 					{ guildId: this.guildId, ...values }
 			  )
-			: await his.model.create({ guildId: this.guildId, ...values });
+			: await this.model.create({ guildId: this.guildId, ...values });
+		this.clear();
 		return { guildId: this.guildId, ...values };
 	}
 }
