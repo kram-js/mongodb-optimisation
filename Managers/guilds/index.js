@@ -18,6 +18,13 @@ class GuildManager extends Map {
 		this.guildId = guildId;
 		this.model = require("./model");
 	}
+	async sync() {
+		const values = await this.model.findOne({ guildId: this.guildId });
+		for (const key in values?.toObject()) {
+			if (!key.includes("_")) this.set(key, values[key]);
+		}
+		return this;
+	}
 	async save() {
 		const values = {};
 		this.forEach((v, k) => (values[k] = v));
@@ -27,7 +34,6 @@ class GuildManager extends Map {
 					{ guildId: this.guildId, ...values }
 			  )
 			: await this.model.create({ guildId: this.guildId, ...values });
-		this.clear();
 		return { guildId: this.guildId, ...values };
 	}
 }
