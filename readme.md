@@ -2,7 +2,7 @@
 
 ---
 
-- By kram
+- By young2chen
 - Using Mongoose@6
 
 ---
@@ -36,4 +36,4 @@ mongoose.connect("MongoDB-URL").then(async() => {
 
 ### **Contacts**
 
-> Errors / need help ? Discord: kram#1234
+> Errors / need help ? Discord: young2chen#3110
